@@ -22,14 +22,14 @@
 
   <body>
   	<header>
-  		<div>
+  		<div id="page-title">
   			<h1 id="main_title">Blissful Talk</h1>
   			<hr>
   			<p id="main_title_subtext">A relaxing and open blog</p>
   		</div>
   	</header>
 
- 
+ 	<div class="container">
 
 <%
 
@@ -53,9 +53,11 @@
 
 %>
 
-<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
+<p id="user-greeting">Hello, ${fn:escapeXml(user.nickname)}! (You can
 
 <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+
+
 
 <%
 
@@ -63,11 +65,11 @@
 
 %>
 
-<p>Hello!
+<p class="warning-message">
 
 <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
 
-to include your name with greetings you post.</p>
+to post</p>
 
 <%
 
@@ -95,7 +97,7 @@ to include your name with greetings you post.</p>
 
         %>
 
-        <p>Guestbook '${fn:escapeXml(guestbookName)}' has no messages.</p>
+        <p class="blog-paragraph">No Current Blog Posts :(</p>
 
         <%
 
@@ -103,64 +105,45 @@ to include your name with greetings you post.</p>
 
         %>
 
-        <p>Messages in Guestbook '${fn:escapeXml(guestbookName)}'.</p>
+        <h1 class="page-headers">Latest Posts</h1>
 
         <%
-
-        for (Greeting greeting : greetings) {
-
-            pageContext.setAttribute("greeting_content",
-
-                                     greeting.getContent());
-
+        int greetingIndex = greetings.size() - 1;
+        while(greetingIndex >= 0 && (greetings.size() - 1 - greetingIndex) < 5) {
+        	Greeting greeting = greetings.get(greetingIndex);
+            pageContext.setAttribute("greeting_content", greeting.getContent());
             if (greeting.getUser() == null) {
-
                 %>
-
-                <p>An anonymous person wrote:</p>
-
+                <p class="blog-paragraph">An anonymous person wrote:</p>
                 <%
-
             } else {
-
-                pageContext.setAttribute("greeting_user",
-
-                                         greeting.getUser());
-
+                pageContext.setAttribute("greeting_user", greeting.getUser());
                 %>
-
-                <p><b>${fn:escapeXml(greeting_user.nickname)}</b> wrote:</p>
-
+                <p class="blog-paragraph"><b>${fn:escapeXml(greeting_user.nickname)}</b> wrote:</p>
                 <%
-
             }
-
             %>
-
-            <blockquote>${fn:escapeXml(greeting_content)}</blockquote>
-
+            <blockquote class="blog-subparagraph">${fn:escapeXml(greeting_content)}</blockquote>
             <%
-
+            greetingIndex -= 1;
         }
-
     }
+    if (user != null) {
+
+      pageContext.setAttribute("user", user);
+      %>
+      	<form action="/sign" method="post">
+      		<div><textarea name="content" rows="10" cols="100"></textarea></div>
+      		<div><input type="submit" value="Post Greeting" /></div>
+      		<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
+    	</form>
+      <%
+      
+   }
 
 %>
 
- 
-
-    <form action="/sign" method="post">
-
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-
-      <div><input type="submit" value="Post Greeting" /></div>
-
-      <input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
-
-    </form>
-
- 
-
+	</div>
   </body>
 
 </html>

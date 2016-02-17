@@ -18,8 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static com.googlecode.objectify.ObjectifyService.*;
 
-
-
+ 
 public class OfySignGuestbookServlet extends HttpServlet {
 	
 	

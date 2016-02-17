@@ -2,6 +2,7 @@ body {
    font-family: Verdana, Helvetica, sans-serif;
    background-color: #EDEDED;
    text-align: center;
+   font-family: 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
 }
 
 header {
@@ -20,8 +21,12 @@ header {
     -o-background-size: cover;
 }
 
-div {
-	margin: 110px;
+textarea {
+	resize: none;
+}
+
+#page-title {
+	margin: 150px;
 	width: -webkit-fit-content;
 	height: -webkit-fit-content;
 	width: -moz-fit-content;
@@ -39,6 +44,47 @@ div {
 #main_title_subtext {
 	color: #FFFFFF;
 	font-size: 30px;
+}
+
+.blog-paragraph {
+	color: #262626;
+	font-size: 30px;
+}
+
+.blog-subparagraph {
+	color: #262626;
+	font-size: 30px;
+}
+
+.container {
+	height: 100%;
+	padding-left: 75px;
+	padding-right: 75px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	text-align: left;
+}
+
+.page-headers {
+	text-align: left;
+	font-size: 40px;
+	color: #262626;
+}
+
+.warning-message{
+	color: red;
+	text-align: left;
+	font-size: 25px;
+}
+
+#user-greeting{
+	text-align: right;
+	text-size: 30px;
+}
+
+form {
+	margin-top: 60px;
+	margin-bottom: 35px;
 }
 
 body {
