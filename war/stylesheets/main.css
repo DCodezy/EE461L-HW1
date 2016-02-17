@@ -1,6 +1,6 @@
 body {
    font-family: Verdana, Helvetica, sans-serif;
-   background-color: #FFFFCC;
+   background-color: #EDEDED;
    text-align: center;
 }
 
@@ -26,8 +26,4 @@ div {
 	height: -moz-fit-content;
 	display: inline-block;
 	vertical-align: middle;
-}
-
-h1{
-	font-size: 75px;
 }
