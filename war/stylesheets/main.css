@@ -11,6 +11,7 @@ header {
     min-height: auto;
     text-align: center;
     vertical-align: middle;
+    background-image: url("img/introImage.jpg");
     color: #000;
     background-position: center;
     -webkit-background-size: cover;
@@ -20,10 +21,26 @@ header {
 }
 
 div {
+	margin: 110px;
 	width: -webkit-fit-content;
 	height: -webkit-fit-content;
 	width: -moz-fit-content;
 	height: -moz-fit-content;
 	display: inline-block;
 	vertical-align: middle;
+}
+
+
+#main_title {
+	color: #F7F7F7;
+	font-size: 75px;
+}
+
+#main_title_subtext {
+	color: #FFFFFF;
+	font-size: 30px;
+}
+
+body {
+	margin: 0px;
 }
