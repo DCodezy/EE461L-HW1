@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+<cron>
+<url>/cron/mycronjob</url>
+<description>Email digest</description>
+<schedule>every day 17:00</schedule>
+</cron>
+</cronentries>
