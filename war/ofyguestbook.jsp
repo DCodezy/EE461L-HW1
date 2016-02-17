@@ -22,7 +22,11 @@
 
   <body>
   	<header>
-  		<div><h1>Title!</h1></div>
+  		<div>
+  			<h1 id="main_title">Blissful Talk</h1>
+  			<hr>
+  			<p id="main_title_subtext">A relaxing and open blog</p>
+  		</div>
   	</header>
 
  
