@@ -49,13 +49,7 @@
     UserService userService = UserServiceFactory.getUserService();
 
     User user = userService.getCurrentUser();
-%>
-<p id="view-posts"> 
 
-<a href="">view-posts</a>
-
-</p>
-<%
     if (user != null) {
 
       pageContext.setAttribute("user", user);
