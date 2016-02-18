@@ -46,7 +46,13 @@
     UserService userService = UserServiceFactory.getUserService();
 
     User user = userService.getCurrentUser();
+%>
+<p id="view-posts"> 
 
+<a href="">view-posts</a>
+
+</p>
+<%
     if (user != null) {
 
       pageContext.setAttribute("user", user);
@@ -83,7 +89,7 @@ to post</p>
 
     // Run an ancestor query to ensure we see the most up-to-date
 
-    // view of the Greetings belonging to the selected Guestbook.
+    // view of the Greetings belonging to the selected Guestbook
 
     //Query query = new Query("Greeting", guestbookKey).addSort("date", Query.SortDirection.DESCENDING);
 
