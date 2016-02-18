@@ -79,7 +79,30 @@ textarea {
 
 #user-greeting{
 	text-align: right;
-	text-size: 30px;
+	font-size: 25px;
+}
+
+#older-posts {
+	text-decoration: none;
+	font-size: 25px;
+	color: #404040;
+	margin-bottom: 25px;
+}
+
+#home-page {
+	text-decoration: none;
+	font-size: 25px;
+	color: #404040;
+	margin-bottom: 25px;
+}
+
+.section-separator {
+	margin-top: 35px;
+	margin-bottom: 35px;
+}
+
+.post-date {
+	font-size: 25px;
 }
 
 #view-posts{
@@ -88,7 +111,7 @@ textarea {
 }
 
 form {
-	margin-top: 60px;
+	margin-top: 35px;
 	margin-bottom: 35px;
 }
 
