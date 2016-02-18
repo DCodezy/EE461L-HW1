@@ -49,6 +49,10 @@ public class Greeting implements Comparable<Greeting> {
         return content;
 
     }
+    
+    public Date getDate() {
+    	return date;
+    }
 
     @Override
 

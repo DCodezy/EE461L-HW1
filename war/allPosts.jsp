@@ -17,24 +17,13 @@
 
 <html>
 
-  <head>
-	<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-  </head>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+	</head>
 
- 
+	<div class="container">
 
-  <body>
-  	<header>
-  		<div id="page-title">
-  			<h1 id="main_title">Blissful Talk</h1>
-  			<hr>
-  			<p id="main_title_subtext">A relaxing and open blog</p>
-  		</div>
-  	</header>
-
- 	<div class="container">
-
-<%
+	<%
 
     String guestbookName = request.getParameter("guestbookName");
 
@@ -45,45 +34,7 @@
     }
 
     pageContext.setAttribute("guestbookName", guestbookName);
-
-    UserService userService = UserServiceFactory.getUserService();
-
-    User user = userService.getCurrentUser();
-
-    if (user != null) {
-
-      pageContext.setAttribute("user", user);
-
-%>
-
-<p id="user-greeting">Hello, ${fn:escapeXml(user.nickname)}! (You can
-
-<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-
-
-
-<%
-
-    } else {
-
-%>
-
-<p class="warning-message">
-
-<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-
-to post</p>
-
-<%
-
-    }
-
-%>
-
- 
-
-<%
-
+    
     // Run an ancestor query to ensure we see the most up-to-date
 
     // view of the Greetings belonging to the selected Guestbook.
@@ -108,13 +59,12 @@ to post</p>
 
         %>
 
-        <h1 class="page-headers">Latest Posts</h1>
+        <h1 class="page-headers">All Posts</h1>
 
         <%
         DateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, 'at' hh:mm a zzz");
-        int greetingIndex = greetings.size() - 1;
-        while(greetingIndex >= 0 && (greetings.size() - 1 - greetingIndex) < 5) {
-        	Greeting greeting = greetings.get(greetingIndex);
+        for(int i = greetings.size() - 1; i >= 0; i--) {
+        	Greeting greeting = greetings.get(i);
             pageContext.setAttribute("greeting_content", greeting.getContent());
             pageContext.setAttribute("greeting_user", greeting.getUser());
             pageContext.setAttribute("greeting_date", dateFormat.format(greeting.getDate()));
@@ -122,28 +72,12 @@ to post</p>
                 <p class="blog-paragraph"><b>${fn:escapeXml(greeting_user.nickname)}</b> on <span class="post-date">${fn:escapeXml(greeting_date)}</span></p>
             	<blockquote class="blog-subparagraph">${fn:escapeXml(greeting_content)}</blockquote>
             <%
-            greetingIndex -= 1;
         }
-        %>
-        <hr class="section-separator">
-        <a href="/allPosts.jsp" id="older-posts"><b>&gt;Older Posts</b></a>
-        <%
     }
-    if (user != null) {
-
-      pageContext.setAttribute("user", user);
-      %>
-      	<form action="/sign" method="post">
-      		<div><textarea name="content" rows="10" cols="100"></textarea></div>
-      		<div><input type="submit" value="Post Greeting" /></div>
-      		<input type="hidden" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/>
-    	</form>
-      <%
-      
-   }
 
 %>
-
+	<hr class="section-separator">
+	<a href="/ofyguestbook.jsp" id="home-page">&lt;Back</a>
 	</div>
   </body>
 
