@@ -9,6 +9,8 @@
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="guestbook.Greeting" %>
+<%@ page import="guestbook.Subscribe" %>
+
 
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -91,6 +93,8 @@ to post</p>
     //Query query = new Query("Greeting", guestbookKey).addSort("date", Query.SortDirection.DESCENDING);
 
     ObjectifyService.register(Greeting.class);
+    ObjectifyService.register(Subscribe.class);
+    
 
 	List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).list();   
 
