@@ -35,16 +35,19 @@ public class CronJobServlet extends HttpServlet
 		String msgBody = "test";
 		List<Subscribe> subscriptionList = ObjectifyService.ofy().load().type(Subscribe.class).list();   
 		try {
-			for(Subscribe sub : subscriptionList)
+			if(subscriptionList.size() != 0)
 			{
-				_logger.info("Cron Job has been executed");
-			    Message msg = new MimeMessage(session);
-			    msg.setFrom(new InternetAddress("anything@appname.appspotmail.com", "Example.com Admin")); //change this once we know actual email
-			    msg.addRecipient(Message.RecipientType.TO,
-			     new InternetAddress(""+sub.getUser(), sub.getUser().getNickname()));
-			    msg.setSubject("Daily Subscription Digest!");
-			    msg.setText(msgBody);		//put digest info here
-			    Transport.send(msg);
+				for(Subscribe sub : subscriptionList)
+				{
+					_logger.info("Cron Job has been executed");
+				    Message msg = new MimeMessage(session);
+				    msg.setFrom(new InternetAddress("anything@appname.appspotmail.com", "Example.com Admin")); //change this once we know actual email
+				    msg.addRecipient(Message.RecipientType.TO,
+				     new InternetAddress(""+sub.getUser(), sub.getUser().getNickname()));
+				    msg.setSubject("Daily Subscription Digest!");
+				    msg.setText(msgBody);		//put digest info here
+				    Transport.send(msg);
+				}
 			}
 		
 		} catch (AddressException e) {
