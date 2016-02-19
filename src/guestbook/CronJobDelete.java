@@ -27,7 +27,8 @@ public class CronJobDelete extends HttpServlet {
                 throws IOException {
         UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
-		List<Subscribe> subscriptionList = ObjectifyService.ofy().load().type(Subscribe.class).list();   
+        Subscribe conversion = new Subscribe (user);		
+        List<Subscribe> subscriptionList = ObjectifyService.ofy().load().type(Subscribe.class).list();   
 		
 		/*Finds user and deletes from list*/
 		Iterator<Subscribe> i = subscriptionList.iterator();
@@ -36,10 +37,9 @@ public class CronJobDelete extends HttpServlet {
 		   Subscribe s = i.next(); 
 		   if(s.getUser().equals(user))
 		   {
-			    i.remove();
+		        ofy().delete().entity(conversion).now();
 		   }
 		}
-
         resp.sendRedirect("/ofyguestbook.jsp");
     }
 }
