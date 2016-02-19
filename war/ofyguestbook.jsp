@@ -129,9 +129,21 @@ to post</p>
         <a href="/allPosts.jsp" id="older-posts"><b>&gt;Older Posts</b></a>
         <%
     }
-    if (user != null) {
 
+    if (user != null) {
+  	  %>
+      	<form action="/cron/cronjobadd" method="post">
+      		<div><input type="submit" value="Subscribe for future posts!" /></div>
+      	</form>
+      <%
+       %>
+      	<form action="/cron/cronjobdelete" method="post">
+      		<div><input type="submit" value="Unsubscribe =(" /></div>
+      	</form>
+      <%
+      
       pageContext.setAttribute("user", user);
+      
       %>
       	<form action="/sign" method="post">
       		<div><textarea name="content" rows="10" cols="100"></textarea></div>

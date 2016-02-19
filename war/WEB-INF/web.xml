@@ -34,6 +34,26 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</filter-mapping>
 	
 	<servlet>
+	<servlet-name>CronJobAdd</servlet-name>
+	<servlet-class>guestbook.CronJobAdd</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>CronJobAdd</servlet-name>
+	<url-pattern>/cron/cronjobadd</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>CronJobDelete</servlet-name>
+	<servlet-class>guestbook.CronJobDelete</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>CronJobDelete</servlet-name>
+	<url-pattern>/cron/cronjobdelete</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 	<servlet-name>CronJob</servlet-name>
 	<servlet-class>guestbook.CronJobServlet</servlet-class>
 	</servlet>

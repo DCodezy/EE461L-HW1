@@ -6,7 +6,14 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.googlecode.objectify.*;
+
+import java.util.List;
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -25,20 +32,20 @@ public class CronJobServlet extends HttpServlet
 	throws IOException {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
-		String msgBody = "...";
-		
+		String msgBody = "test";
+		List<Subscribe> subscriptionList = ObjectifyService.ofy().load().type(Subscribe.class).list();   
 		try {
-			//in here, do a for loop with all the subscription email addresses.
-			
-			
-			_logger.info("Cron Job has been executed");
-		    Message msg = new MimeMessage(session);
-		    msg.setFrom(new InternetAddress("admin@example.com", "Example.com Admin"));
-		    msg.addRecipient(Message.RecipientType.TO,
-		     new InternetAddress("user@example.com", "Mr. User"));
-		    msg.setSubject("Your Example.com account has been activated");
-		    msg.setText(msgBody);
-		    Transport.send(msg);
+			for(Subscribe sub : subscriptionList)
+			{
+				_logger.info("Cron Job has been executed");
+			    Message msg = new MimeMessage(session);
+			    msg.setFrom(new InternetAddress("anything@appname.appspotmail.com", "Example.com Admin")); //change this once we know actual email
+			    msg.addRecipient(Message.RecipientType.TO,
+			     new InternetAddress(""+sub.getUser(), sub.getUser().getNickname()));
+			    msg.setSubject("Daily Subscription Digest!");
+			    msg.setText(msgBody);		//put digest info here
+			    Transport.send(msg);
+			}
 		
 		} catch (AddressException e) {
 		    // ...
@@ -48,6 +55,7 @@ public class CronJobServlet extends HttpServlet
 		catch (Exception ex) 
 		{
 		}
+        resp.sendRedirect("/ofyguestbook.jsp");
 	}
 	
 	@Override

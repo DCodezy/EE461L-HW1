@@ -18,7 +18,7 @@ public class GuestbookServlet extends HttpServlet {
 	static {
 
         ObjectifyService.register(Greeting.class);
-
+        ObjectifyService.register(Subscribe.class);
     }
 	
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
