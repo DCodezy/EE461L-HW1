@@ -16,9 +16,8 @@ import com.googlecode.objectify.ObjectifyService;
 public class GuestbookServlet extends HttpServlet {
 
 	static {
-
+        ObjectifyService.register(Subscribe.class);
         ObjectifyService.register(Greeting.class);
-
     }
 	
     public void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -9,6 +9,8 @@
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="guestbook.Greeting" %>
+<%@ page import="guestbook.Subscribe" %>
+
 
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -86,11 +88,13 @@ to post</p>
 
     // Run an ancestor query to ensure we see the most up-to-date
 
-    // view of the Greetings belonging to the selected Guestbook.
+    // view of the Greetings belonging to the selected Guestbook
 
     //Query query = new Query("Greeting", guestbookKey).addSort("date", Query.SortDirection.DESCENDING);
 
     ObjectifyService.register(Greeting.class);
+    ObjectifyService.register(Subscribe.class);
+    
 
 	List<Greeting> greetings = ObjectifyService.ofy().load().type(Greeting.class).list();   
 
@@ -129,9 +133,21 @@ to post</p>
         <a href="/allPosts.jsp" id="older-posts"><b>&gt;Older Posts</b></a>
         <%
     }
-    if (user != null) {
 
+    if (user != null) {
+  	  %>
+      	<form action="/cron/cronjobadd" method="post">
+      		<div><input type="submit" value="Subscribe for future posts!" /></div>
+      	</form>
+      <%
+       %>
+      	<form action="/cron/cronjobdelete" method="post">
+      		<div><input type="submit" value="Unsubscribe =(" /></div>
+      	</form>
+      <%
+      
       pageContext.setAttribute("user", user);
+      
       %>
       	<form action="/sign" method="post">
       		<div><textarea name="content" rows="10" cols="100"></textarea></div>
