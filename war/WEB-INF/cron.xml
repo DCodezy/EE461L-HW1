@@ -3,6 +3,6 @@
 <cron>
 <url>/cron/mycronjob</url>
 <description>Email digest</description>
-<schedule>every 2 minutes</schedule>
+<schedule>every 15 minutes</schedule>
 </cron>
 </cronentries>
