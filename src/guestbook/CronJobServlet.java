@@ -11,6 +11,9 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -28,12 +31,45 @@ import javax.mail.internet.MimeMessage;
 public class CronJobServlet extends HttpServlet 
 {
 	private static final Logger _logger = Logger.getLogger(CronJobServlet.class.getName());
+	private static Date lastDate = null;
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws IOException {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		String msgBody = "test";
 		List<Subscribe> subscriptionList = ObjectifyService.ofy().load().type(Subscribe.class).list();   
+		
+		ObjectifyService.register(Greeting.class);
+		List<Greeting> tempGreetings = ObjectifyService.ofy().load().type(Greeting.class).list();   
+		Collections.sort(tempGreetings); 
+		List<Greeting> greetings = new ArrayList<Greeting>();
+		if(lastDate == null){
+			greetings = tempGreetings;
+		} else{
+			boolean foundOne = false;
+			for(Greeting indivGreeting : tempGreetings){
+				if(indivGreeting.getDate().after(lastDate)){
+					greetings.add(indivGreeting);
+					foundOne = true;
+				}
+			}
+			if(foundOne){
+				lastDate = new Date();
+			}
+		}
+		
+		
+		String newUpdates = "";
+		if(greetings.size() == 0){
+			newUpdates = "No new updates... :(";
+		} else{
+			for(Greeting indivGreeting : greetings){
+				newUpdates = newUpdates + indivGreeting.getUser().getNickname() + "\n" + indivGreeting.getContent() + "\n\n";
+			}
+		}
+		
+		
+		
 		try {
 			if(subscriptionList.size() != 0)
 			{
@@ -45,7 +81,7 @@ public class CronJobServlet extends HttpServlet
 				    msg.addRecipient(Message.RecipientType.TO,
 				     new InternetAddress(sub.getUser().getEmail(), sub.getUser().getEmail()));
 				    msg.setSubject("Daily Subscription Digest!");
-				    msg.setText(msgBody);		//put digest info here
+				    msg.setText(newUpdates);		//put digest info here
 				    Transport.send(msg);
 				}
 			}
