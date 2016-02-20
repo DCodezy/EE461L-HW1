@@ -43,7 +43,7 @@ public class CronJobServlet extends HttpServlet
 				    Message msg = new MimeMessage(session);
 				    msg.setFrom(new InternetAddress("xxx@APP-ID.appspotmail.com", "Example.com Admin")); //change this once we know actual email
 				    msg.addRecipient(Message.RecipientType.TO,
-				     new InternetAddress(""+sub.getUser(), sub.getUser().getNickname()));
+				     new InternetAddress(sub.getUser().getEmail(), sub.getUser().getEmail()));
 				    msg.setSubject("Daily Subscription Digest!");
 				    msg.setText(msgBody);		//put digest info here
 				    Transport.send(msg);
