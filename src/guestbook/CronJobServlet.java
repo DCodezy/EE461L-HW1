@@ -41,7 +41,7 @@ public class CronJobServlet extends HttpServlet
 				{
 					_logger.info("Cron Job has been executed");
 				    Message msg = new MimeMessage(session);
-				    msg.setFrom(new InternetAddress("anything@appname.appspotmail.com", "Example.com Admin")); //change this once we know actual email
+				    msg.setFrom(new InternetAddress("xxx@APP-ID.appspotmail.com", "Example.com Admin")); //change this once we know actual email
 				    msg.addRecipient(Message.RecipientType.TO,
 				     new InternetAddress(""+sub.getUser(), sub.getUser().getNickname()));
 				    msg.setSubject("Daily Subscription Digest!");
