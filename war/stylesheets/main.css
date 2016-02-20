@@ -25,6 +25,11 @@ textarea {
 	resize: none;
 }
 
+.link-button {
+	float: left;
+	right-margin: 35px;
+}
+
 #page-title {
 	margin: 150px;
 	width: -webkit-fit-content;
