@@ -136,19 +136,22 @@ to post</p>
 
     if (user != null) {
   	  %>
-      	<form action="/cron/cronjobadd" method="post">
-      		<div><input type="submit" value="Subscribe for future posts!" /></div>
+  	  <div class="button-div">
+      	<form action="/cron/cronjobadd" method="post" class="link-button">
+      		<div class="sub-buttons"><input type="submit" value="Subscribe for future posts!" /></div>
       	</form>
       <%
        %>
-      	<form action="/cron/cronjobdelete" method="post">
-      		<div><input type="submit" value="Unsubscribe =(" /></div>
+      	<form action="/cron/cronjobdelete" method="post" class="link-button">
+      		<div class="sub-buttons"><input type="submit" value="Unsubscribe =(" /></div>
       	</form>
+      </div>
       <%
       
       pageContext.setAttribute("user", user);
       
       %>
+      	<br />
       	<form action="/sign" method="post">
       		<div><textarea name="content" rows="10" cols="100"></textarea></div>
       		<div><input type="submit" value="Post Greeting" /></div>

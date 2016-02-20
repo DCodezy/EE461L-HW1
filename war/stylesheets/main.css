@@ -26,8 +26,18 @@ textarea {
 }
 
 .link-button {
-	float: left;
-	right-margin: 35px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 20px;
+	display: inline;
+}
+
+.sub-buttons {
+	display: inline;
+}
+
+.button-div {
+	display: inline-block;
 }
 
 #page-title {
